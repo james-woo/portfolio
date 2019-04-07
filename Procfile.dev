@@ -1,0 +1,2 @@
+web: SET PORT=3000 && yarn --cwd client start
+api: SET PORT=3001 && bundle exec rails s
