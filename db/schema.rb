@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_07_115802) do
+ActiveRecord::Schema.define(version: 2019_04_07_131551) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_04_07_115802) do
     t.integer "experienceable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
     t.index ["experienceable_type", "experienceable_id"], name: "index_experiences_on_experienceable_type_and_experienceable_id"
   end
 

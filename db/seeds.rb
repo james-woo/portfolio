@@ -10,11 +10,11 @@ if Rails.env.development?
   AdminUser.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
   job = Job.create(start_time: "2018-04-06 14:35:07", end_time: "2019-04-06 14:35:07")
-  job.create_experience(content: "Job experience")
+  job.create_experience(title: "Job title", content: "Job experience")
 
   project = Project.create
-  project.create_experience(content: "Project experience")
+  project.create_experience(title: "Project title", content: "Project experience")
 
   education = Education.create(start_time: "2018-04-06 14:35:07", end_time: "2019-04-06 14:35:07")
-  education.create_experience(content: "Education experience")
+  education.create_experience(title: "Education title", content: "Education experience")
 end

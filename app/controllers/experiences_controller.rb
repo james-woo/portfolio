@@ -9,16 +9,19 @@ class ExperiencesController < ApiController
       jobs: jobs.map { |job|
         job.attributes.tap { |j|
           j[:content] = job.experience.content
+          j[:title] = job.experience.title
         } 
       },
       projects: projects.map { |project|
         project.attributes.tap { |pr|
           pr[:content] = project.experience.content
+          pr[:title] = project.experience.title
         } 
       },
       educations: educations.map { |education| 
         education.attributes.tap { |ed|
           ed[:content] = education.experience.content
+          ed[:title] = education.experience.title
         }
       }
     }
