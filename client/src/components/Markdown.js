@@ -31,6 +31,6 @@ export default class Markdown extends Component {
       <div style={markdownAreaStyle}>
         <ReactMarkdown source={this.state.source} />
       </div>
-    )
+    );
   }
 }

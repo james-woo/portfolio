@@ -5,7 +5,7 @@ import Employment from "./Employment";
 import Project from "./Project";
 import Education from "./Education";
 
-class Main extends Component {
+export default class Main extends Component {
   constructor () {
     super()
     this.state = {
@@ -32,9 +32,9 @@ class Main extends Component {
     this.fetch("/api/experiences")
       .then(experiences => {
         if (experiences) {
-          this.setState({experiences: experiences})
+          this.setState({experiences: experiences});
         } else {
-          this.setState({experiences: []})
+          this.setState({experiences: []});
         }
       })
   }
@@ -51,5 +51,3 @@ class Main extends Component {
     );
   }
 }
-
-export default Main;

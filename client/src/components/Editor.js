@@ -6,13 +6,13 @@ export default class Editor extends Component {
     this.state = {
       isControlled: Boolean(this.props.value)
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.editorRef = React.createRef()
+    this.handleChange = this.handleChange.bind(this);
+    this.editorRef = React.createRef();
   }
 
   componentDidUpdate() {
     if (!this.editor) {
-      return
+      return;
     }
 
     if (this.props.value) {
@@ -24,34 +24,34 @@ export default class Editor extends Component {
 
   handleChange() {
     if (!this.editor) {
-      return
+      return;
     }
 
     const value = this.editor.getValue()
     if (value === this.props.value) {
-      return
+      return;
     }
 
     if (this.props.onChange) {
-      this.props.onChange({target: {value: value}})
+      this.props.onChange({target: {value: value}});
     }
 
     if (this.editor.getValue() !== this.props.value) {
       if (this.state.isControlled) {
-        this.editor.setValue(this.props.value)
+        this.editor.setValue(this.props.value);
       } else {
-        this.props.value = value
+        this.props.value = value;
       }
     }
   }
 
   render() {
     const textAreaStyle = {
-      border: 'none',
-      backgroundColor: '#272822',
-      color: 'white',
-      padding: '1rem',
-      boxShadow: '2px 2px 0px 0px #eee'
+      border: "none",
+      backgroundColor: "#272822",
+      color: "white",
+      padding: "1rem",
+      boxShadow: "2px 2px 0px 0px #eee"
     }
     return(
       <div className="ui form">

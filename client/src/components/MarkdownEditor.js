@@ -27,11 +27,11 @@ export default class MarkdownEditor extends Component {
   }
 
   save() {
-    this.toggleHidden()
+    this.toggleHidden();
   }
 
   cancel() {
-    this.toggleHidden()
+    this.toggleHidden();
   }
 
   render() {
@@ -64,6 +64,6 @@ export default class MarkdownEditor extends Component {
             </button>
           </div>
       </div>
-    )
+    );
   }
 }
