@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Grid } from "semantic-ui-react"
-import { Redirect } from 'react-router-dom'
+import { Button, Form, Grid } from "semantic-ui-react";
 
 export default class LoginForm extends Component {
   constructor() {
@@ -28,8 +27,10 @@ export default class LoginForm extends Component {
     try {
       await window.fetch("http://localhost:3001/auth/login", {
         headers:{
-          "accepts":"application/json"
+          "accepts":"application/json",
+          "Content-Type": "application/json"
         },
+        credentials: "include",
         method: "post",
         body: JSON.stringify({
           "session": {
@@ -37,18 +38,13 @@ export default class LoginForm extends Component {
             "password": this.state.password 
           }
         })
-      }).then(login => {
-        if (login) {
-          alert("Logged in");
-        } else {
-          alert("Not logged in");
-        }
+      }).then(() => {
+        this.props.history.push("/");
       })
     }
     catch (e) {
       console.log(e);
     }
-    return <Redirect to='/' />
   }
 
   render() {
@@ -71,13 +67,16 @@ export default class LoginForm extends Component {
           <Grid.Column style={{ maxWidth: 450 }}>
             <Form size="large" onSubmit={this.handleSubmit}>
               <Form.Input 
+                id="username"
                 fluid 
+                autoFocus
                 icon="user" 
                 iconPosition="left" 
                 placeholder="Username"
                 onChange={this.handleChange}
               />
               <Form.Input
+                id="password"
                 fluid
                 icon="lock"
                 iconPosition="left"

@@ -1,4 +1,4 @@
-class EducationsController < ApplicationController
+class EducationsController < ApiController
   before_action :set_education, only: [:show, :update, :destroy]
 
   # GET /educations

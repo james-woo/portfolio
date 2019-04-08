@@ -1,5 +1,6 @@
 class ExperiencesController < ApiController
   before_action :set_experience, only: [:show, :update, :destroy]
+  before_action :authenicate_user, only: [:create, :update, :destroy]
 
   def index
     jobs = Job.all

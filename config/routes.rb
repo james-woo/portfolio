@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/new'
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-
   scope 'api' do
     resources :projects
     resources :jobs
@@ -11,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   scope 'auth' do
+    resources :users
     post '/login',   to: 'sessions#create'
     delete '/logout',  to: 'sessions#destroy'
   end

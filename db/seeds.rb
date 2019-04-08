@@ -9,6 +9,8 @@
 if Rails.env.development?
   AdminUser.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
+  User.create(username: 'admin', password: 'password', password_confirmation: 'password')
+
   job = Job.create(start_time: "2018-04-06 14:35:07", end_time: "2019-04-06 14:35:07")
   job.create_experience(title: "Job title", content: "Job experience")
 
