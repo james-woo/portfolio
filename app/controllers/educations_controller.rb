@@ -1,5 +1,6 @@
 class EducationsController < ApiController
   before_action :set_education, only: [:show, :update, :destroy]
+  before_action :authorize_request, only: [:create, :update, :destroy]
 
   # GET /educations
   def index

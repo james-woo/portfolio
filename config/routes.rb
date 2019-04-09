@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   end
 
   scope 'auth' do
-    resources :users
-    post '/login',   to: 'sessions#create'
-    delete '/logout',  to: 'sessions#destroy'
+    post '/login',   to: 'authentication#create'
+    delete '/logout',  to: 'authentication#destroy'
   end
   
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do

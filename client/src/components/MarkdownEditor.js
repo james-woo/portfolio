@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactMarkdown from "react-markdown";
+import { Cookies } from 'react-cookie';
 import Editor from "./Editor";
 import Markdown from "./Markdown";
 
@@ -7,12 +8,13 @@ export default class MarkdownEditor extends Component {
   constructor (props) {
     super(props);
     this.handleMarkdownChange = this.handleMarkdownChange.bind(this);
-    this.toggleHidden = this.toggleHidden.bind(this);
+    this.toggleHideMarkdown = this.toggleHideMarkdown.bind(this);
     this.save = this.save.bind(this);
     this.cancel = this.cancel.bind(this);
     this.state = {
       markdownContent: props.content,
-      isHidden: true
+      markdownHidden: true,
+      controlsHidden: !new Cookies().get("j")
     };
   }
 
@@ -20,27 +22,29 @@ export default class MarkdownEditor extends Component {
     this.setState({markdownContent: event.target.value});
   }
 
-  toggleHidden() {
+  toggleHideMarkdown() {
     this.setState({
-      isHidden: !this.state.isHidden
+      markdownHidden: !this.state.markdownHidden
     })
   }
 
   save() {
-    this.toggleHidden();
+    this.toggelHideMarkdown();
   }
 
   cancel() {
-    this.toggleHidden();
+    this.toggelHideMarkdown();
   }
 
   render() {
     return (
       <div>
-          {this.state.isHidden &&
+          {
+            this.state.markdownHidden &&
             <ReactMarkdown source={this.state.markdownContent} />
           }
-          {!this.state.isHidden && 
+          {
+            !this.state.markdownHidden && 
             <div>
               <div className="ui equal width grid">
                 <div className="column">
@@ -52,17 +56,22 @@ export default class MarkdownEditor extends Component {
               </div>
             </div>
           }
-          <div className="ui small basic bottom icon buttons">
-            <button className="ui icon button" onClick={this.toggleHidden}>
-              <i className="edit icon"></i>
-            </button>
-            <button className="ui button" onClick={this.save}>
-              <i className="save icon"></i>
-            </button>
-            <button className="ui button" onClick={this.cancel}>
-              <i className="cancel icon"></i>
-            </button>
-          </div>
+          {
+            !this.state.controlsHidden &&
+            <div>
+              <div className="ui small basic bottom icon buttons">
+              <button className="ui icon button" onClick={this.toggleHideMarkdown}>
+                <i className="edit icon"></i>
+              </button>
+              <button className="ui button" onClick={this.save}>
+                <i className="save icon"></i>
+              </button>
+              <button className="ui button" onClick={this.cancel}>
+                <i className="cancel icon"></i>
+              </button>
+            </div>
+            </div>
+          }
       </div>
     );
   }

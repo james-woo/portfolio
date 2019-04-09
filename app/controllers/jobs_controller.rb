@@ -1,5 +1,6 @@
 class JobsController < ApiController
   before_action :set_job, only: [:show, :update, :destroy]
+  before_action :authorize_request, only: [:create, :update, :destroy]
 
   # GET /jobs
   def index

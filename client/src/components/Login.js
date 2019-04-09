@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Grid } from "semantic-ui-react";
+import { Cookies } from 'react-cookie';
 
 export default class LoginForm extends Component {
   constructor() {
@@ -33,14 +34,21 @@ export default class LoginForm extends Component {
         credentials: "include",
         method: "post",
         body: JSON.stringify({
-          "session": {
+          "authentication": {
             "username": this.state.username,
             "password": this.state.password 
           }
         })
-      }).then(() => {
+      }).then(response => {
+        if (response.ok) {
+          let cookies = new Cookies()
+          cookies.set("j", "w", {
+            path: "/",
+            secure: process.env.NODE_ENV !== "development"
+          });
+        }
         this.props.history.push("/");
-      })
+      });
     }
     catch (e) {
       console.log(e);
