@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 export default class Editor extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isControlled: Boolean(this.props.value)
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.editorRef = React.createRef();
   }

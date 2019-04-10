@@ -8,50 +8,53 @@ export default class MarkdownEditor extends Component {
   constructor (props) {
     super(props);
     this.handleMarkdownChange = this.handleMarkdownChange.bind(this);
-    this.toggleHideMarkdown = this.toggleHideMarkdown.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
     this.save = this.save.bind(this);
     this.cancel = this.cancel.bind(this);
     this.state = {
-      markdownContent: props.content,
-      markdownHidden: true,
-      controlsHidden: !new Cookies().get("j")
+      id: props.id,
+      content: props.content,
+      controlsHidden: !new Cookies().get("j"),
+      editing: false,
+      service: props.service
     };
   }
 
   handleMarkdownChange(event) {
-    this.setState({markdownContent: event.target.value});
+    this.setState({content: event.target.value});
   }
 
-  toggleHideMarkdown() {
+  toggleEdit() {
     this.setState({
-      markdownHidden: !this.state.markdownHidden
+      editing: !this.state.editing
     })
   }
 
-  save() {
-    this.toggelHideMarkdown();
+  async save() {
+    this.toggleEdit();
+    this.state.service.update(this.state.id, this.state.content);
   }
 
   cancel() {
-    this.toggelHideMarkdown();
+    this.toggleEdit();
   }
 
   render() {
     return (
       <div>
           {
-            this.state.markdownHidden &&
-            <ReactMarkdown source={this.state.markdownContent} />
+            !this.state.editing &&
+            <ReactMarkdown source={this.state.content} />
           }
           {
-            !this.state.markdownHidden && 
+            this.state.editing && 
             <div>
               <div className="ui equal width grid">
                 <div className="column">
-                  <Editor value={this.state.markdownContent} onChange={this.handleMarkdownChange} />
+                  <Editor value={this.state.content} onChange={this.handleMarkdownChange} />
                 </div>
                 <div className="column">
-                  <Markdown source={this.state.markdownContent} />
+                  <Markdown source={this.state.content} />
                 </div>
               </div>
             </div>
@@ -60,16 +63,16 @@ export default class MarkdownEditor extends Component {
             !this.state.controlsHidden &&
             <div>
               <div className="ui small basic bottom icon buttons">
-              <button className="ui icon button" onClick={this.toggleHideMarkdown}>
-                <i className="edit icon"></i>
-              </button>
-              <button className="ui button" onClick={this.save}>
-                <i className="save icon"></i>
-              </button>
-              <button className="ui button" onClick={this.cancel}>
-                <i className="cancel icon"></i>
-              </button>
-            </div>
+                <button className="ui icon button" onClick={this.toggleEdit}>
+                  <i className="edit icon"></i>
+                </button>
+                <button className="ui button" onClick={this.save} disabled={!this.state.editing}>
+                  <i className="save icon"></i>
+                </button>
+                <button className="ui button" onClick={this.cancel} disabled={!this.state.editing}>
+                  <i className="cancel icon"></i>
+                </button>
+              </div>
             </div>
           }
       </div>

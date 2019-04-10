@@ -27,8 +27,18 @@ class JobsController < ApiController
 
   # PATCH/PUT /jobs/1
   def update
-    if @job.update(job_params)
-      render json: @job
+    experience = @job.experience
+    if job_params[:content]
+      experience.update(content: job_params[:content])
+    end
+    if job_params[:start_time]
+      @job.update(start_time: job_params[:start_time])
+    end
+    if job_params[:end_time]
+      @job.update(end_time: job_params[:end_time])
+    end
+    if experience && @job
+      render json: @job.attributes.tap { |job| job[:content] = experience.content }
     else
       render json: @job.errors, status: :unprocessable_entity
     end

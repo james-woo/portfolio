@@ -26,7 +26,7 @@ export default class LoginForm extends Component {
     console.log("Logging in...")
     event.preventDefault();
     try {
-      await window.fetch("http://localhost:3001/auth/login", {
+      await window.fetch("/auth/login", {
         headers:{
           "accepts":"application/json",
           "Content-Type": "application/json"
@@ -44,6 +44,7 @@ export default class LoginForm extends Component {
           let cookies = new Cookies()
           cookies.set("j", "w", {
             path: "/",
+            maxAge: 360,
             secure: process.env.NODE_ENV !== "development"
           });
         }
