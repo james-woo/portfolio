@@ -42,9 +42,9 @@ export default class Main extends Component {
     return (
       <Container>
         <About />
-        <Experienceable experienceable={experiences["jobs"]} header="Employment" resource="jobs" />
-        <Experienceable experienceable={experiences["projects"]} header="Projects" resource="projects" />
-        <Experienceable experienceable={experiences["educations"]} header="Education" resource="educations" />
+        <Experienceable experienceable={experiences["jobs"]} header="Employment" resource="job" />
+        <Experienceable experienceable={experiences["projects"]} header="Projects" resource="project" />
+        <Experienceable experienceable={experiences["educations"]} header="Education" resource="education" />
       </Container>
     );
   }

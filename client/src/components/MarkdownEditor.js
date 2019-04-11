@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactMarkdown from "react-markdown";
-import { Cookies } from 'react-cookie';
 import Editor from "./Editor";
 import Markdown from "./Markdown";
 
@@ -10,18 +9,27 @@ export default class MarkdownEditor extends Component {
     this.handleMarkdownChange = this.handleMarkdownChange.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.save = this.save.bind(this);
-    this.cancel = this.cancel.bind(this);
+    this.delete = this.delete.bind(this);
     this.state = {
       id: props.id,
       content: props.content,
-      controlsHidden: !new Cookies().get("j"),
-      editing: false,
-      service: props.service
+      controlsHidden: props.controlsHidden === undefined ? true : props.controlsHidden,
+      editing: props.editing === undefined ? false : props.editing,
+      service: props.service,
+      onChange: props.onChange
     };
   }
 
-  handleMarkdownChange(event) {
-    this.setState({content: event.target.value});
+  handleMarkdownChange(e) {
+    this.setState({content: e.target.value});
+    var event = {
+      target: {
+        value: e.target.value,
+        id: this.state.id
+      }
+    };
+
+    this.props.onChange(event);
   }
 
   toggleEdit() {
@@ -35,8 +43,9 @@ export default class MarkdownEditor extends Component {
     this.state.service.update(this.state.id, this.state.content);
   }
 
-  cancel() {
-    this.toggleEdit();
+  delete() {
+    this.state.service.delete(this.state.id);
+    window.location.reload();
   }
 
   render() {
@@ -69,9 +78,11 @@ export default class MarkdownEditor extends Component {
                 <button className="ui button" onClick={this.save} disabled={!this.state.editing}>
                   <i className="save icon"></i>
                 </button>
-                <button className="ui button" onClick={this.cancel} disabled={!this.state.editing}>
-                  <i className="cancel icon"></i>
-                </button>
+                { this.state.editing &&
+                  <button className="ui button" onClick={this.delete} disabled={!this.state.editing}>
+                    <i className="close icon"></i>
+                  </button>
+                }
               </div>
             </div>
           }

@@ -2,6 +2,7 @@ class ApiController < ActionController::API
   include ::ActionController::Cookies
 
   def authorize_request
+    return if Rails.env.development?
     jwt = cookies.signed[:jwt]
     begin
       @decoded = JsonWebToken.decode(jwt)

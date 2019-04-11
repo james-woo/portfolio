@@ -3,9 +3,9 @@ export default class ExperienceableService {
     this.resource = resource;
   }
 
-  async create(content) {
+  async create(payload) {
     try {
-      await window.fetch("/api/" + this.resource + "/", {
+      await window.fetch("/api/" + this.resource + "s/", {
         headers:{
           "accepts":"application/json",
           "Content-Type": "application/json"
@@ -13,8 +13,11 @@ export default class ExperienceableService {
         credentials: "include",
         method: "post",
         body: JSON.stringify({
-          "job": {
-            "content": content,
+          [this.resource]: {
+            "title": payload.title,
+            "start_time": payload.startDate,
+            "end_time": payload.endDate,
+            "content": payload.content,
           }
         })
       }).then(response => {
@@ -30,7 +33,7 @@ export default class ExperienceableService {
 
   async update(id, content) {
     try {
-      await window.fetch("/api/" + this.resource + "/" + id, {
+      await window.fetch("/api/" + this.resource + "s/" + id, {
         headers:{
           "accepts":"application/json",
           "Content-Type": "application/json"
@@ -38,7 +41,7 @@ export default class ExperienceableService {
         credentials: "include",
         method: "put",
         body: JSON.stringify({
-          "job": {
+          [this.resource]: {
             "content": content,
           }
         })
@@ -55,7 +58,7 @@ export default class ExperienceableService {
 
   async delete(id) {
     try {
-      await window.fetch("/api/" + this.resource + "/" + id, {
+      await window.fetch("/api/" + this.resource + "s/" + id, {
         headers:{
           "accepts":"application/json",
           "Content-Type": "application/json"

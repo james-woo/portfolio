@@ -16,9 +16,12 @@ class JobsController < ApiController
 
   # POST /jobs
   def create
-    @job = Job.new(job_params)
-
-    if @job.save
+    @job = Job.new(
+      start_time: job_params[:start_time],
+      end_time: job_params[:end_time]
+    )
+  
+    if @job.save && @job.create_experience(title: job_params[:title], content: job_params[:content])
       render json: @job, status: :created, location: @job
     else
       render json: @job.errors, status: :unprocessable_entity
@@ -57,6 +60,6 @@ class JobsController < ApiController
 
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.require(:job).permit(:start_time, :end_time, :content)
+      params.require(:job).permit(:title, :start_time, :end_time, :content)
     end
 end

@@ -44,7 +44,7 @@ export default class LoginForm extends Component {
           let cookies = new Cookies()
           cookies.set("j", "w", {
             path: "/",
-            maxAge: 360,
+            maxAge: 3600,
             secure: process.env.NODE_ENV !== "development"
           });
         }
