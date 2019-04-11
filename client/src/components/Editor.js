@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-
+import CodeMirror from "react-codemirror";
+require('codemirror/lib/codemirror.css');
+require('codemirror/mode/markdown/markdown');
 export default class Editor extends Component {
   constructor(props) {
     super(props);
@@ -46,27 +48,17 @@ export default class Editor extends Component {
   }
 
   render() {
-    const textAreaStyle = {
-      border: "none",
-      backgroundColor: "#272822",
-      color: "white",
-      padding: "1rem",
-      boxShadow: "2px 2px 0px 0px #eee"
+    const options = {
+      lineNumbers: true,
+      theme: "monokai",
+      mode: "markdown"
     }
     return(
-      <div className="ui form">
-        <div className="field">
-          <textarea 
-            style={textAreaStyle}
-            ref={this.editorRef}
-            value={this.props.value}
-            readOnly={this.props.readOnly}
-            defaultValue={this.props.defaultValue}
-            onChange={this.props.onChange}
-            className={this.props.textAreaClassName}
-          />
-        </div>
-      </div>
+      <CodeMirror 
+        defaultValue={this.props.defaultValue} 
+        value={this.props.value} 
+        onChange={this.props.onChange}
+        options={options} />
     );
   }
 }

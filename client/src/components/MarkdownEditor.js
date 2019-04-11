@@ -21,15 +21,17 @@ export default class MarkdownEditor extends Component {
   }
 
   handleMarkdownChange(e) {
-    this.setState({content: e.target.value});
-    var event = {
-      target: {
-        value: e.target.value,
-        id: this.state.id
-      }
-    };
-
-    this.props.onChange(event);
+    this.setState({content: e});
+    
+    if (this.props.onChange !== undefined) {
+      var event = {
+        target: {
+          value: e,
+          id: this.state.id
+        }
+      };
+      this.props.onChange(event);
+    }
   }
 
   toggleEdit() {

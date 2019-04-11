@@ -24,8 +24,7 @@ export default class Markdown extends Component {
       resize: "none",
       boxShadow: "2px 2px 0px 0px #eee",
       width: "100%",
-      height: "100%",
-      borderRadius: "2px"
+      height: "100%"
     }
     return (
       <div style={markdownAreaStyle}>
