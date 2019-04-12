@@ -3,9 +3,9 @@ class ExperiencesController < ApiController
   before_action :authorize_request, only: [:create, :update, :destroy]
 
   def index
-    jobs = Job.all
-    projects = Project.all
-    educations = Education.all
+    jobs = Job.all.sort_by { |j| j[:start_time] }.reverse
+    projects = Project.all.sort_by { |pr| pr[:start_time] }.reverse
+    educations = Education.all.sort_by { |ed| ed[:start_time] }.reverse
     @experiences = {
       jobs: jobs.map { |job|
         job.attributes.tap { |j|

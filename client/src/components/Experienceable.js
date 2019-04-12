@@ -28,7 +28,7 @@ export default class Experienceable extends Component {
     let resource = this.props.resource;
     let experienceable = this.props.experienceable;
     return (
-      <div className="ui text">
+      <div className="ui text container">
         <div className="ui hidden divider" />
         <div className="ui center aligned header">
           <h1>
@@ -46,7 +46,7 @@ export default class Experienceable extends Component {
         {experienceable && experienceable.map((experienceable) => {
           return (
             <div key={experienceable["id"]} className="ui center aligned text">
-              <h2>{experienceable["title"]}</h2>
+              <h2><img className="ui mini spaced left image" src={`/${experienceable["image"]}`} alt={experienceable["image"]}></img>{experienceable["title"]}</h2>
               <p>{Moment(experienceable["start_time"]).format("MMMM YYYY")} - {Moment(experienceable["end_time"]).format("MMMM YYYY")}</p>
               <MarkdownEditor 
                 id={experienceable["id"]} 
