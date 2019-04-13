@@ -7,7 +7,6 @@
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-codemirror": "^1.0.0",
     "react-cookie": "^3.1.2",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
@@ -17,11 +16,25 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0"
   },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.16.0",
+    "prettier": "^1.17.0",
+    "eslint-config-react-app": "^3.0.8",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-babel": "^8.0.1",
+    "eslint-plugin-flowtype": "^2.50.3",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-prettier": "^3.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": "react-app"

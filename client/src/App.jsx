@@ -8,12 +8,12 @@ import NotFound from "./components/NotFound";
 import "./App.css";
 
 class App extends Component {
-  render() {  
+  render() {
     return (
       <div className="application">
         <Helmet>
           <title>James Woo</title>
-          <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAABEQAAAAAAAAAREAAAAAAAAAERAAAAAAAAABEBAAAQAAAAEQEQAREAAAARARERERAAABEAEREBEAAAEQABEAEQAAARAAAAARAAABEAAAABEAAAEQAAAAEQAAARAAAAAREAAAAAAAAAERAAAAAAAAABH//wAAP/8AAB//AACP/wAAx/8AAOXvAADkxwAA5AMAAOYTAADnMwAA5/MAAOfzAADn8wAA5/EAAP/4AAD//AAA"/>
+          <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         </Helmet>
         <Router>
           <Switch>
@@ -23,7 +23,6 @@ class App extends Component {
           </Switch>
         </Router>
       </div>
-      
     );
   }
 }

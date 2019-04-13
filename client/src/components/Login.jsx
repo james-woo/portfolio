@@ -1,60 +1,65 @@
 import React, { Component } from "react";
 import { Button, Form, Grid } from "semantic-ui-react";
-import { Cookies } from 'react-cookie';
+import { Cookies } from "react-cookie";
 
 export default class LoginForm extends Component {
   constructor() {
     super();
-    this.validateForm = this.validateForm.bind(this);
     this.state = {
       username: "",
       password: ""
-    }
+    };
+    this.cookies = new Cookies();
   }
 
-  validateForm() {
-    return this.state.username.length > 0 && this.state.password.length > 0;
-  }
+  validateForm = () => {
+    const { username, password } = this.state;
+    return username.length > 0 && password.length > 0;
+  };
 
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
   handleSubmit = async event => {
-    console.log("Logging in...")
+    console.log("Logging in...");
+    const { username, password } = this.state;
+    const { history } = this.props;
     event.preventDefault();
     try {
-      await window.fetch("/auth/login", {
-        headers:{
-          "accepts":"application/json",
-          "Content-Type": "application/json"
-        },
-        credentials: "include",
-        method: "post",
-        body: JSON.stringify({
-          "authentication": {
-            "username": this.state.username,
-            "password": this.state.password 
-          }
+      await window
+        .fetch("/auth/login", {
+          headers: {
+            accepts: "application/json",
+            "Content-Type": "application/json"
+          },
+          credentials: "include",
+          method: "post",
+          body: JSON.stringify({
+            authentication: {
+              username,
+              password
+            }
+          })
         })
-      }).then(response => {
-        if (response.ok) {
-          let cookies = new Cookies()
-          cookies.set("j", "w", {
-            path: "/",
-            maxAge: 3600,
-            secure: process.env.NODE_ENV !== "development"
-          });
-        }
-        this.props.history.push("/");
-      });
-    }
-    catch (e) {
+        .then(response => {
+          if (response.ok) {
+            console.log("Logged in");
+            this.cookies.set("j", "w", {
+              path: "/",
+              secure: process.env.NODE_ENV !== "development"
+            });
+          } else {
+            console.log(`Error: ${response}`);
+          }
+          history.push("/");
+        });
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   render() {
     return (
@@ -64,7 +69,8 @@ export default class LoginForm extends Component {
           You can do same with CSS, the main idea is that all the elements up to the `Grid`
           below must have a height of 100%.
         */}
-        <style>{`
+        <style>
+          {`
           body > div,
           body > div > div,
           body > div > div > div.login-form {
@@ -72,15 +78,19 @@ export default class LoginForm extends Component {
           }
         `}
         </style>
-        <Grid textAlign="center" style={{ height: "100%" }} verticalAlign="middle">
+        <Grid
+          textAlign="center"
+          style={{ height: "100%" }}
+          verticalAlign="middle"
+        >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Form size="large" onSubmit={this.handleSubmit}>
-              <Form.Input 
+              <Form.Input
                 id="username"
-                fluid 
+                fluid
                 autoFocus
-                icon="user" 
-                iconPosition="left" 
+                icon="user"
+                iconPosition="left"
                 placeholder="Username"
                 onChange={this.handleChange}
               />
@@ -96,7 +106,8 @@ export default class LoginForm extends Component {
               <Button
                 disabled={!this.validateForm}
                 type="submit"
-                fluid size="large" 
+                fluid
+                size="large"
               >
                 Login
               </Button>
@@ -104,6 +115,6 @@ export default class LoginForm extends Component {
           </Grid.Column>
         </Grid>
       </div>
-    )
+    );
   }
 }
