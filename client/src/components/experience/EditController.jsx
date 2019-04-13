@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
 export default class EditController extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      editing: false
+      editing: props.editing
     };
   }
 

@@ -16,8 +16,9 @@ export default class ExperienceableService {
           body: JSON.stringify({
             [this.resource]: {
               title: payload.title,
-              start_time: payload.startDate,
-              end_time: payload.endDate,
+              image: payload.Image,
+              start_time: payload.start_time,
+              end_time: payload.end_time,
               content: payload.content
             }
           })
@@ -32,7 +33,7 @@ export default class ExperienceableService {
     }
   }
 
-  async update(id, content) {
+  async update(id, payload) {
     try {
       await window
         .fetch("/api/" + this.resource + "s/" + id, {
@@ -44,7 +45,11 @@ export default class ExperienceableService {
           method: "put",
           body: JSON.stringify({
             [this.resource]: {
-              content: content
+              title: payload.title,
+              image: payload.image,
+              start_time: payload.start_time,
+              end_time: payload.end_time,
+              content: payload.content
             }
           })
         })

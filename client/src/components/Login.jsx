@@ -88,7 +88,6 @@ export default class LoginForm extends Component {
               <Form.Input
                 id="username"
                 fluid
-                autoFocus
                 icon="user"
                 iconPosition="left"
                 placeholder="Username"

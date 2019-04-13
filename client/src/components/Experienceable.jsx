@@ -1,78 +1,45 @@
 import React, { Component } from "react";
 import { Cookies } from "react-cookie";
-import Moment from "moment";
-import MarkdownEditor from "./MarkdownEditor";
-import EditController from "./EditController";
-import ExperienceableService from "../lib/ExperienceableService";
+import Header from "./Header";
+import Experience from "./experience/Experience";
+import Create from "./experience/Create";
 
 export default class Experienceable extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      id: props.id,
-      editing: false,
-      content: props.experienceable.content
+      hideExperienceableForm: true,
+      controlsHidden: !new Cookies().get("j")
     };
-    this.service = new ExperienceableService(props.resource);
-    this.controlsHidden = !new Cookies().get("j");
   }
 
-  onChange = event => {
+  onAddExperience = () => {
+    const { hideExperienceableForm } = this.state;
     this.setState({
-      content: event.target.value
+      hideExperienceableForm: !hideExperienceableForm
     });
-  };
-
-  onEdit = () => {
-    const { editing } = this.state;
-    this.setState({
-      editing: !editing
-    });
-  };
-
-  onSave = async () => {
-    const { id, content } = this.state;
-    this.service.update(id, content);
-    window.location.reload();
-  };
-
-  onDelete = () => {
-    const { id } = this.state;
-    this.service.delete(id);
-    window.location.reload();
   };
 
   render() {
-    const { experienceable } = this.props;
-    const { editing } = this.state;
+    const { header, resource, experienceable } = this.props;
+    const { controlsHidden, hideExperienceableForm } = this.state;
     return (
-      <div>
-        <h2>
-          <img
-            className="ui mini spaced left image"
-            src={`/${experienceable.image}`}
-            alt={experienceable.image}
-          />
-          {experienceable.title}
-        </h2>
-        <p>
-          {`${Moment(experienceable.start_time).format("MMMM YYYY")} - ${Moment(
-            experienceable.end_time
-          ).format("MMMM YYYY")}`}
-        </p>
-        <MarkdownEditor
-          id={experienceable.id}
-          content={experienceable.content}
-          editing={editing}
-          onChange={this.onChange}
+      <div className="ui text container">
+        <div className="ui hidden divider" />
+        <Header
+          header={header}
+          controlsHidden={controlsHidden}
+          onAddExperience={this.onAddExperience}
         />
-        {!this.controlsHidden && (
-          <EditController
-            onEdit={this.onEdit}
-            onSave={this.onSave}
-            onDelete={this.onDelete}
-          />
-        )}
+        {experienceable &&
+          experienceable.map(e => (
+            <div key={e.id} className="ui center aligned text">
+              <div className="ui hidden divider" />
+              <Experience experienceable={e} resource={resource} />
+            </div>
+          ))}
+        <div className="ui hidden divider" />
+        {!hideExperienceableForm && <Create resource={resource} />}
       </div>
     );
   }

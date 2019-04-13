@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "semantic-ui-react";
 import About from "./About";
-import ExperienceableContainer from "./ExperienceableContainer";
+import Experienceable from "./Experienceable";
 import Footer from "./Footer";
 
 export default class Main extends Component {
@@ -41,17 +41,17 @@ export default class Main extends Component {
     return (
       <Container>
         <About />
-        <ExperienceableContainer
+        <Experienceable
           experienceable={experiences.jobs}
           header="Employment"
           resource="job"
         />
-        <ExperienceableContainer
+        <Experienceable
           experienceable={experiences.projects}
           header="Projects"
           resource="project"
         />
-        <ExperienceableContainer
+        <Experienceable
           experienceable={experiences.educations}
           header="Education"
           resource="education"
