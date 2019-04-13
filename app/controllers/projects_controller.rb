@@ -16,9 +16,12 @@ class ProjectsController < ApiController
 
   # POST /projects
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(
+      start_time: project_params[:start_time],
+      end_time: project_params[:end_time]
+    )
 
-    if @project.save
+    if @project.save && @project.create_experience(title: project_params[:title], image: project_params[:image], content: project_params[:content])
       render json: @project, status: :created, location: @project
     else
       render json: @project.errors, status: :unprocessable_entity
@@ -27,8 +30,11 @@ class ProjectsController < ApiController
 
   # PATCH/PUT /projects/1
   def update
-    if @project.update(project_params)
-      render json: @project
+    experience = @project.experience
+    experience.update(title: project_params[:title], image: project_params[:image], content: project_params[:content])
+    @project.update(start_time: project_params[:start_time], end_time: project_params[:end_time])
+    if experience && @project
+      render json: @project.attributes.tap { |project| project[:content] = experience.content }
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -47,6 +53,6 @@ class ProjectsController < ApiController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:content)
+      params.require(:project).permit(:title, :image, :start_time, :end_time, :content)
     end
 end

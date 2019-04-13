@@ -12,9 +12,10 @@ User.create(
   password_confirmation: Rails.application.secrets.secret_password
 )
 
-job = Job.create(image: "logo.png", start_time: "2011-12-01T12:00:00Z", end_time: "2014-06-01T12:00:00Z")
+job = Job.create(start_time: "2011-12-01T12:00:00Z", end_time: "2014-06-01T12:00:00Z")
 job.create_experience(
-  title: "Math & Sciences Tutor", 
+  title: "Math & Sciences Tutor",
+  image: "logo.png",
   content: <<~END
     - Taught grades 10-12 math and science courses
     - Showed students how to excel with studies, taught techniques on solving problems
@@ -22,9 +23,10 @@ job.create_experience(
   END
 )
 
-job = Job.create(image: "smarttechnologies.png", start_time: "2015-09-01T12:00:00Z", end_time: "2015-12-01T12:00:00Z")
+job = Job.create(start_time: "2015-09-01T12:00:00Z", end_time: "2015-12-01T12:00:00Z")
 job.create_experience(
-  title: "SMART Technologies Inc./ Software Test Developer Intern", 
+  title: "SMART Technologies Inc./ Software Test Developer Intern",
+  image: "smarttechnologies.png",
   content: <<~END
     - Developed test automation scripts for SMART Notebook (Robot Framework/Selenium)
     - Designed and developed test tools to increase quality of test infrastructure (C#/Python)
@@ -32,9 +34,10 @@ job.create_experience(
   END
 )
 
-job = Job.create(image: "safesoftware.png", start_time: "2016-05-01T12:00:00Z", end_time: "2016-08-01T12:00:00Z")
+job = Job.create(start_time: "2016-05-01T12:00:00Z", end_time: "2016-08-01T12:00:00Z")
 job.create_experience(
   title: "Safe Software Inc./ Software Developer Intern", 
+  image: "safesoftware.png",
   content: <<~END
     - Added features on the invalid geometry transformer for FME Workbench, this work allowed users to determine where and why certain geometry shapes were invalid (C++/Java)
     - Implemented user interface changes, fixed bugs for FME workbench (C++/Java)
@@ -42,9 +45,10 @@ job.create_experience(
   END
 )
 
-job = Job.create(image: "shopify.png", start_time: "2017-09-01T12:00:00Z", end_time: "2017-12-01T12:00:00Z")
+job = Job.create(start_time: "2017-09-01T12:00:00Z", end_time: "2017-12-01T12:00:00Z")
 job.create_experience(
   title: "Shopify/ Android Developer Intern", 
+  image: "shopify.png", 
   content: <<~END
     - Implemented Android native support for Ruby on Rails web admin pages on Mobile Shopify, this work made certain pages use screen space more efficiently and made the page feel like a native experience
     - Worked on integrating app extensions and embedded apps from Mobile Shopify to Shopify POS, which allows merchants to perform additional actions such as order printing
@@ -52,24 +56,27 @@ job.create_experience(
   END
 )
 
-job = Job.create(image: "shopify.png", start_time: "2018-03-01T12:00:00Z", end_time: nil)
+job = Job.create(start_time: "2018-03-01T12:00:00Z", end_time: nil)
 job.create_experience(
-  title: "Shopify/ Developer", 
+  title: "Shopify/ Developer",
+  image: "shopify.png",  
   content: <<~END
     - Currently working with the Merchant Experience of Apps team as a mobile and backend developer
   END
 )
 
-project = Project.create(image: "beatsbear.png", start_time: "2017-08-01T12:00:00Z", end_time: "2017-08-01T12:00:00Z")
+project = Project.create(start_time: "2017-08-01T12:00:00Z", end_time: "2017-08-01T12:00:00Z")
 project.create_experience(
+  image: "beatsbear.png", 
   title: "BeatsBear", 
   content: <<~END
     A real time tempo adjustment android application for runners.
   END
 )
 
-education = Education.create(image: "uvic.png", start_time: "2014-09-01T12:00:00Z", end_time: "2017-12-01T12:00:00Z")
+education = Education.create(start_time: "2014-09-01T12:00:00Z", end_time: "2017-12-01T12:00:00Z")
 education.create_experience(
+  image: "uvic.png", 
   title: "University of Victoria/ Bachelor of Software Engineering", 
   content: <<~END
     ### Awards

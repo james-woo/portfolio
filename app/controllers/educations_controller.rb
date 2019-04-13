@@ -16,9 +16,12 @@ class EducationsController < ApiController
 
   # POST /educations
   def create
-    @education = Education.new(education_params)
-
-    if @education.save
+    @education = Education.new(
+      start_time: education_params[:start_time],
+      end_time: education_params[:end_time]
+    )
+  
+    if @education.save && @education.create_experience(title: education_params[:title], image: education_params[:image], content: education_params[:content])
       render json: @education, status: :created, location: @education
     else
       render json: @education.errors, status: :unprocessable_entity
@@ -27,8 +30,11 @@ class EducationsController < ApiController
 
   # PATCH/PUT /educations/1
   def update
-    if @education.update(education_params)
-      render json: @education
+    experience = @education.experience
+    experience.update(title: education_params[:title], image: education_params[:image], content: education_params[:content])
+    @education.update(start_time: education_params[:start_time], end_time: education_params[:end_time])
+    if experience && @education
+      render json: @education.attributes.tap { |education| education[:content] = experience.content }
     else
       render json: @education.errors, status: :unprocessable_entity
     end
@@ -47,6 +53,6 @@ class EducationsController < ApiController
 
     # Only allow a trusted parameter "white list" through.
     def education_params
-      params.require(:education).permit(:start_time, :end_time)
+      params.require(:education).permit(:title, :image, :start_time, :end_time, :content)
     end
 end

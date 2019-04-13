@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 2019_04_08_002720) do
   create_table "educations", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "experiences", force: :cascade do |t|
     t.string "title"
+    t.string "image"
     t.string "content"
     t.string "experienceable_type"
     t.integer "experienceable_id"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2019_04_08_002720) do
   create_table "jobs", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,7 +40,6 @@ ActiveRecord::Schema.define(version: 2019_04_08_002720) do
   create_table "projects", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
