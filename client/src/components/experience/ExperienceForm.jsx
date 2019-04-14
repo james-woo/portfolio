@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import MarkdownEditor from "./MarkdownEditor";
+import MarkdownEditor from "../markdown/MarkdownEditor";
 import Moment from "moment";
 import ExperienceableService from "../../lib/ExperienceableService";
 
-export default class Edit extends Component {
+export default class ExperienceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: props.id,
       service: props.service,
-      experienceable: props.experienceable
+      experience: props.experience
     };
     this.service = new ExperienceableService(props.resource);
   }
@@ -19,15 +19,15 @@ export default class Edit extends Component {
   };
 
   render() {
-    const { experienceable } = this.state;
+    const { experience } = this.state;
     const startDate =
-      experienceable.start_time == null
+      experience.start_time == null
         ? ""
-        : Moment(experienceable.start_time).format("YYYY-MM-DD");
+        : Moment(experience.start_time).format("YYYY-MM-DD");
     const endDate =
-      experienceable.end_time == null
+      experience.end_time == null
         ? ""
-        : Moment(experienceable.end_time).format("YYYY-MM-DD");
+        : Moment(experience.end_time).format("YYYY-MM-DD");
     return (
       <div>
         <form className="ui form">
@@ -37,7 +37,7 @@ export default class Edit extends Component {
               <input
                 type="text"
                 id="title"
-                defaultValue={experienceable.title}
+                defaultValue={experience.title}
                 onChange={this.onChange}
               />
             </label>
@@ -48,7 +48,7 @@ export default class Edit extends Component {
               <input
                 type="text"
                 id="image"
-                defaultValue={experienceable.image}
+                defaultValue={experience.image}
                 onChange={this.onChange}
               />
             </label>
@@ -77,8 +77,8 @@ export default class Edit extends Component {
           </div>
           <p>Content</p>
           <MarkdownEditor
-            id={experienceable.id}
-            content={experienceable.content}
+            id={experience.id}
+            content={experience.content}
             onChange={this.onChange}
           />
         </form>

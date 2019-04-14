@@ -2,27 +2,45 @@ import React, { Component } from "react";
 import { Cookies } from "react-cookie";
 import Header from "./Header";
 import Experience from "./experience/Experience";
-import Create from "./experience/Create";
+import ExperienceCreate from "./experience/ExperienceCreate";
+import ExperienceableService from "../lib/ExperienceableService";
 
 export default class Experienceable extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      hideExperienceableForm: true,
+      hideExperienceForm: true,
       controlsHidden: !new Cookies().get("j")
     };
+    this.service = new ExperienceableService(props.resource);
   }
 
   onAddExperience = () => {
-    const { hideExperienceableForm } = this.state;
+    const { hideExperienceForm } = this.state;
     this.setState({
-      hideExperienceableForm: !hideExperienceableForm
+      hideExperienceForm: !hideExperienceForm
     });
   };
 
+  onCreated = experience => {
+    return;
+  };
+
+  onMoveUp = experience => {
+    console.log("Move up", experience);
+    this.service.move(experience, "up");
+    window.location.reload();
+  };
+
+  onMoveDown = experience => {
+    console.log("Move down", experience);
+    this.service.move(experience, "down");
+    window.location.reload();
+  };
+
   render() {
-    const { header, resource, experienceable } = this.props;
-    const { controlsHidden, hideExperienceableForm } = this.state;
+    const { experiences, header, resource } = this.props;
+    const { controlsHidden, hideExperienceForm } = this.state;
     return (
       <div className="ui text container">
         <div className="ui hidden divider" />
@@ -31,15 +49,22 @@ export default class Experienceable extends Component {
           controlsHidden={controlsHidden}
           onAddExperience={this.onAddExperience}
         />
-        {experienceable &&
-          experienceable.map(e => (
+        {experiences &&
+          experiences.map(e => (
             <div key={e.id} className="ui center aligned text">
               <div className="ui hidden divider" />
-              <Experience experienceable={e} resource={resource} />
+              <Experience
+                experience={e}
+                resource={resource}
+                onMoveUp={this.onMoveUp}
+                onMoveDown={this.onMoveDown}
+              />
             </div>
           ))}
         <div className="ui hidden divider" />
-        {!hideExperienceableForm && <Create resource={resource} />}
+        {!hideExperienceForm && (
+          <ExperienceCreate resource={resource} onCreated={this.onCreated} />
+        )}
       </div>
     );
   }

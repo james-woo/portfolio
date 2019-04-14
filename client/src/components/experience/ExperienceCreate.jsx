@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Edit from "./Edit";
 import ExperienceableService from "../../lib/ExperienceableService";
+import ExperienceForm from "./ExperienceForm";
 
-export default class Experience extends Component {
+export default class ExperienceCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      experienceable: {
+      experience: {
         title: "",
         start_time: new Date(),
         end_time: new Date(),
@@ -17,27 +17,27 @@ export default class Experience extends Component {
   }
 
   onChange = event => {
-    const { experienceable } = this.state;
-    experienceable[event.target.id] = event.target.value;
+    const { experience } = this.state;
+    experience[event.target.id] = event.target.value;
     this.setState({
-      experienceable
+      experience
     });
   };
 
   onSubmit = async event => {
-    const { experienceable } = this.state;
+    const { experience } = this.state;
     event.preventDefault();
-    this.service.create(experienceable);
+    this.service.create(experience);
     window.location.reload();
   };
 
   render() {
     const { resource } = this.props;
-    const { experienceable } = this.state;
+    const { experience } = this.state;
     return (
       <div>
-        <Edit
-          experienceable={experienceable}
+        <ExperienceForm
+          experience={experience}
           resource={resource}
           onChange={this.onChange}
         />

@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   scope 'api' do
-    resources :projects
-    resources :jobs
     resources :experiences
-    resources :educations
+    resources :projects do
+      post :move, on: :member
+    end
+    resources :jobs do
+      post :move, on: :member
+    end
+    resources :educations do
+      post :move, on: :member
+    end
   end
 
   scope 'auth' do

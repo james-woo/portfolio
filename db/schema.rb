@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_002720) do
   create_table "educations", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
+    t.integer "position_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_002720) do
   create_table "jobs", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
+    t.integer "position_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_002720) do
   create_table "projects", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
+    t.integer "position_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

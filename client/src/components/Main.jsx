@@ -42,17 +42,17 @@ export default class Main extends Component {
       <Container>
         <About />
         <Experienceable
-          experienceable={experiences.jobs}
+          experiences={experiences.jobs}
           header="Employment"
           resource="job"
         />
         <Experienceable
-          experienceable={experiences.projects}
+          experiences={experiences.projects}
           header="Projects"
           resource="project"
         />
         <Experienceable
-          experienceable={experiences.educations}
+          experiences={experiences.educations}
           header="Education"
           resource="education"
         />

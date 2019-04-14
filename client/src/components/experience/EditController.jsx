@@ -27,6 +27,16 @@ export default class EditController extends Component {
     onDelete();
   };
 
+  onMoveUp = () => {
+    const { onMoveUp } = this.props;
+    onMoveUp();
+  };
+
+  onMoveDown = () => {
+    const { onMoveDown } = this.props;
+    onMoveDown();
+  };
+
   render() {
     const { editing } = this.state;
     return (
@@ -57,6 +67,12 @@ export default class EditController extends Component {
               <i className="close icon" />
             </button>
           )}
+          <button type="button" className="ui button" onClick={this.onMoveUp}>
+            <i className="angle up icon" />
+          </button>
+          <button type="button" className="ui button" onClick={this.onMoveDown}>
+            <i className="angle down icon" />
+          </button>
         </div>
       </div>
     );
