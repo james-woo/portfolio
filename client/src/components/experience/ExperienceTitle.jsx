@@ -6,7 +6,7 @@ const ExperienceTitle = props => {
     <h2>
       <img
         className="ui mini spaced left image"
-        src={`/${experience.image}`}
+        src={`${experience.image}`}
         alt={experience.image}
       />
       {experience.title}
