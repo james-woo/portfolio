@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Cookies } from "react-cookie";
-import Header from "./Header";
 import Experience from "./experience/Experience";
 import ExperienceCreate from "./experience/ExperienceCreate";
 import ExperienceableService from "../lib/ExperienceableService";
@@ -44,11 +43,21 @@ export default class Experienceable extends Component {
     return (
       <div className="ui text container">
         <div className="ui hidden divider" />
-        <Header
-          header={header}
-          controlsHidden={controlsHidden}
-          onAddExperience={this.onAddExperience}
-        />
+        <div className="ui center aligned header">
+          <h1>
+            {header}
+            {!controlsHidden && (
+              <button
+                type="button"
+                style={{ marginLeft: "0.3em" }}
+                className="circular huge ui icon button"
+                onClick={this.onAddExperience}
+              >
+                <i className="plus icon" />
+              </button>
+            )}
+          </h1>
+        </div>
         {experiences &&
           experiences.map(e => (
             <div key={e.id} className="ui center aligned text">

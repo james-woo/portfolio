@@ -4,7 +4,7 @@ const Footer = () => (
   <center>
     <div className="ui hidden divider" />
     <span role="img" aria-label="footer">
-      Created with 🔴💎 on 🚈 and ⚛️
+      Created with 🚈 and ⚛️
     </span>
     <div className="ui hidden divider" />
   </center>
