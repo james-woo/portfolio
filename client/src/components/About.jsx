@@ -23,7 +23,7 @@ export default class About extends Component {
           Developer at Shopify for the Platform team and our mission is to power
           apps on Shopify. I finished my Bachelors of Software Engineering at
           University of Victoria. My passions include learning 📖, hiking 🌲,
-          and space space exploration 🚀.
+          and space exploration 🚀.
         </span>
         <center>
           <button
