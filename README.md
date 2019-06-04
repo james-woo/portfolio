@@ -11,3 +11,5 @@ Portfolio functionalities:
   - User authentication (must seed user manually, no user registration for obvious reasons)
   - Create, edit, and delete experiences (job, project, education items)
   - Live markdown editing of experience content
+  
+Run with `bin/rake start`
